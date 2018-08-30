@@ -2,20 +2,22 @@
 
 ## Overview
 
-This documentation describes Vietnam Docs API v1. If you have any queries please contact support. The postman collection will be added later.
+This documentation describes Vietnam Docs API v1. If you have any queries please contact support. The postman collection can be found at this [link](https://www.getpostman.com/collections/98421b183550c5f8c645).
 
-1. Schema
-1. Parameters
-1. Root Endpoint
-1. Authentication
-1. Media Types
-3. Supported Endpoints
-3. Supported Document Types 
-2. Confidence Score for Prediction
+## Contents
+- [HyperVerge Vietnam Documents - API Documentation](#hyperverge-vietnam-documents-api-documentation)
+	- [Overview](#overview)
+	- [Contents](#contents)
+	- [Schema](#schema)
+	- [Parameters](#parameters)
+	- [Root Endpoint](#root-endpoint)
+	- [Authentication](#authentication)
+	- [Media Types](#media-types)
+	- [Supported APIs](#supported-apis)
+	- [Supported Document Types](#supported-document-types)
+		- [Response Structure for Each Type](#response-structure-for-each-type)
+	- [Confidence Score for Prediction](#confidence-score-for-prediction)
 
-<!---
-3. API wrappers and sample code snippets (Beta)
---->
 
 ## Schema
 
@@ -25,9 +27,9 @@ We recommend using HTTPS for all API access. All data is received as JSON, and a
 All optional and compulsory parameters are passed as part of the request body.
 
 ## Root Endpoint
-A `GET` request can be issued to the root endpoint to check for successful connection : 
+A `GET` request can be issued to the root endpoint to check for successful connection :
 
-	 curl https://apac.docs.hyperverge.co/v1 
+	 curl https://apac.docs.hyperverge.co/v1
 
 The `plain/text` reponse of `"AoK!"` should be received.
 
@@ -39,7 +41,7 @@ Currently, a simple appId, appKey combination is passed in the request header. T
 	  -H 'appid: xxx' \
 	  -H 'appkey: yyy' \
 	  -H 'content-type: multipart/form-data;' \
-	  -F 'image=@abc.png' 
+	  -F 'image=@abc.png'
 
 
 On failed attempt with invalid credentials or unauthorized access the following error message should be received :
@@ -56,7 +58,7 @@ Please do not expose the appid and appkey on browser applications. In case of a 
 
 ## Media Types
 
-Currently, `jpeg, png and tiff` images and `pdf` are supported by the HyperVerge Docs image extraction APIs. 
+Currently, `jpeg, png and tiff` images and `pdf` are supported by the HyperVerge Docs image extraction APIs.
 
 ## Supported APIs
 
@@ -68,15 +70,15 @@ Can be used to extract information from any or one of the supported documents de
 	* **Method:** `POST`
 	* **Header**
 		- content-type : 'formdata'
-		- appid 
+		- appid
 		- appkey
 	* **Request Body**
 		- 1-2 images or pdfs
 	* **Success Response:**
 	    * **Code:** 200 <br />
-	    * Incase of a properly made request, the response would follow schema.	
+	    * Incase of a properly made request, the response would follow schema.
 
-	    
+
 			```
 			{
 				"status" : "success",
@@ -84,8 +86,8 @@ Can be used to extract information from any or one of the supported documents de
 				"result" : <resultObject>
 			}
 			```
-			
-		    The `resultObject` has the following Schema : 
+
+		    The `resultObject` has the following Schema :
 
 	        ```
 			[{
@@ -110,11 +112,11 @@ Can be used to extract information from any or one of the supported documents de
 				"type" : "id_type"
 			}]
 			```
-		
+
 	* **Error Response:**
 		There are 3 types of request errors and `HTTP Status Code 400` is returned in all 3 cases:
 		- No Image input
-	        
+
 			```       
 	      	{
 	        	"status": "failure",
@@ -144,7 +146,7 @@ Can be used to extract information from any or one of the supported documents de
 			```       
 
 		All error messages follow the same syntax with the statusCode and status also being a part of the response body, and `string` error message with the description of the error.
-		
+
 		**Server Errors**
 		We try our best to avoid these errors, but if by chance they do occur the response code will be 5xx.
 
@@ -152,7 +154,7 @@ Can be used to extract information from any or one of the supported documents de
 
 		- readNID
 			- Input having 2 images
-			 
+
 			 	```
 			    curl -X POST https://apac.docs.hyperverge.co/v1/readNID \
 					  -H 'appid: xxx' \
@@ -161,10 +163,10 @@ Can be used to extract information from any or one of the supported documents de
 					  -F 'image1=@image1_path.png'\
 					  -F 'image2=@image2_path.png'
 				```
-						  
+
 			- Input having 2 pdfs
-			 
-				``` 
+
+				```
 			    curl -X POST https://apac.docs.hyperverge.co/v1/readNID \
 					  -H 'appid: xxx' \
 					  -H 'appkey: yyyy' \
@@ -172,9 +174,9 @@ Can be used to extract information from any or one of the supported documents de
 					  -F 'image1=@image1_path.pdf'\
 					  -F 'image2=@image2_path.pdf'
 				```
-						  
+
 			- Input having 1 image and 1 pdf
-			 
+
 				```	   
 			   curl -X POST https://apac.docs.hyperverge.co/v1/readNID \
 					  -H 'appid: xxx' \
@@ -190,7 +192,7 @@ Can be used to extract information from any or one of the supported documents de
 	* **Method:** `POST`
 	* **Header**
 		- content-type : 'formdata'
-		- appid 
+		- appid
 		- appkey
 	* **Request Body**
 		- image1: \<type: Image/PDF file\>
@@ -200,8 +202,8 @@ Can be used to extract information from any or one of the supported documents de
 		- name: \<type: String, description: Full Name of the Owner\>
 	* **Success Response:**
 	    * **Code:** 200 <br />
-	    * Incase of a properly made request, the response would follow schema.	
-	    
+	    * Incase of a properly made request, the response would follow schema.
+
 			```
 			{
 				"status" : "success",
@@ -209,8 +211,8 @@ Can be used to extract information from any or one of the supported documents de
 				"result" : <resultObject>
 			}
 			```
-			
-		    The `resultObject` has the following Schema : 
+
+		    The `resultObject` has the following Schema :
 
 	        ```
 			[{
@@ -242,11 +244,11 @@ Can be used to extract information from any or one of the supported documents de
 				"type" : "id_type"
 			}]
 			```
-		
+
 	* **Error Response:**
 		There are 3 types of request errors and `HTTP Status Code 400` is returned in all 3 cases:
 		- No Image input
-			    
+
 			```       
 			{
 				"status": "failure",
@@ -266,7 +268,7 @@ Can be used to extract information from any or one of the supported documents de
 			```
 
 		- Larger than allowed image input
-			
+
 			```
 			{
 				"status": "failure",
@@ -276,7 +278,7 @@ Can be used to extract information from any or one of the supported documents de
 			```
 
 		All error messages follow the same syntax with the statusCode and status also being a part of the response body, and `string` error message with the description of the error.
-		
+
 		**Server Errors**
 		We try our best to avoid these errors, but if by chance they do occur the response code will be 5xx.
 
@@ -284,7 +286,7 @@ Can be used to extract information from any or one of the supported documents de
 	* **Sample Calls:**
 
 		 - readMRC
-		 
+
 			    curl -X POST https://apac.docs.hyperverge.co/v1/readMRC \
 					  -H 'appid: xxx' \
 					  -H 'appkey: yyyy' \
@@ -294,21 +296,21 @@ Can be used to extract information from any or one of the supported documents de
 					  -F 'name=Name' \
 					  -F 'dateFirstRegistration=12/10/2015' \
 					  -F 'dateCurrentRegistration=12/10/2016' \
-	
+
 * **DL**
 	*  **URL**
 		* /readDL : used for any of the supported Vietnam Driver's License
 	* **Method:** `POST`
 	* **Header**
 		- content-type : 'formdata'
-		- appid 
+		- appid
 		- appkey
 	* **Request Body**
 		- image1: \<type: Image/PDF file\>
 	* **Success Response:**
 	    * **Code:** 200 <br />
-	    * Incase of a properly made request, the response would follow schema.	
-	    
+	    * Incase of a properly made request, the response would follow schema.
+
 			```
 			{
 				"status" : "success",
@@ -316,8 +318,8 @@ Can be used to extract information from any or one of the supported documents de
 				"result" : <resultObject>
 			}
 			```
-			
-		    The `resultObject` has the following Schema : 
+
+		    The `resultObject` has the following Schema :
 
 	        ```
 			[{
@@ -342,11 +344,11 @@ Can be used to extract information from any or one of the supported documents de
 				"type" : "id_type"
 			}]
 			```
-		
+
 	* **Error Response:**
 		There are 3 types of request errors and `HTTP Status Code 400` is returned in all 3 cases:
 		- No Image input
-			    
+
 			```       
 			{
 				"status": "failure",
@@ -366,7 +368,7 @@ Can be used to extract information from any or one of the supported documents de
 			```
 
 		- Larger than allowed image input
-			
+
 			```
 			{
 				"status": "failure",
@@ -376,7 +378,7 @@ Can be used to extract information from any or one of the supported documents de
 			```
 
 		All error messages follow the same syntax with the statusCode and status also being a part of the response body, and `string` error message with the description of the error.
-		
+
 		**Server Errors**
 		We try our best to avoid these errors, but if by chance they do occur the response code will be 5xx.
 
@@ -384,13 +386,13 @@ Can be used to extract information from any or one of the supported documents de
 	* **Sample Calls:**
 
 		 - readDL
-		 
+
 			    curl -X POST https://apac.docs.hyperverge.co/v1/readDL \
 					  -H 'appid: xxx' \
 					  -H 'appkey: yyyy' \
 					  -H 'content-type: multipart/form-data;' \
-					  -F 'image1=@image_or_pdf_path1.png' 
-					  
+					  -F 'image1=@image_or_pdf_path1.png'
+
 
 * **EVN**
 	*  **URL**
@@ -398,7 +400,7 @@ Can be used to extract information from any or one of the supported documents de
 	* **Method:** `POST`
 	* **Header**
 		- content-type : 'formdata'
-		- appid 
+		- appid
 		- appkey
 	* **Request Body**
 		- image: \<type: Image/PDF file\>
@@ -410,8 +412,8 @@ Can be used to extract information from any or one of the supported documents de
 		- toDate: \<type: Date String in DD/MM/YYYY or DD/MM format, description: To Date of the EVN Bill\>
 	* **Success Response:**
 	    * **Code:** 200 <br />
-	    * Incase of a properly made request, the response would follow schema.	
-	    
+	    * Incase of a properly made request, the response would follow schema.
+
 			```
 			{
 				"status" : "success",
@@ -419,9 +421,9 @@ Can be used to extract information from any or one of the supported documents de
 				"result" : <resultObject>
 			}
 			```
-			
-		    The `resultObject` has the following Schema : 
-			
+
+		    The `resultObject` has the following Schema :
+
 			```
 			{
 				"name": true/false,
@@ -432,11 +434,11 @@ Can be used to extract information from any or one of the supported documents de
 				"amount": true
 			}
 			```
-		
+
 	* **Error Response:**
 		There are 3 types of request errors and `HTTP Status Code 400` is returned in all 3 cases:
 		- No Image input
-		
+
 			```
 			{
 				"status": "failure",
@@ -446,7 +448,7 @@ Can be used to extract information from any or one of the supported documents de
 			```
 
 		- More than 1 image input
-			
+
 			```
 			{
 				"status": "failure",
@@ -456,7 +458,7 @@ Can be used to extract information from any or one of the supported documents de
 			```
 
 		- Larger than allowed image input
-			
+
 			```
 			{
 				"status": "failure",
@@ -466,14 +468,14 @@ Can be used to extract information from any or one of the supported documents de
 			```
 
 		All error messages follow the same syntax with the statusCode and status also being a part of the response body, and `string` error message with the description of the error.
-		
+
 		**Server Errors**
 		We try our best to avoid these errors, but if by chance they do occur the response code will be 5xx.
 
 	* **Sample Calls:**
 
 		 - verifyEVN
-		 
+
 			    curl -X POST https://apac.docs.hyperverge.co/v1/verifyEVN \
 					  -H 'appid: xxx' \
 					  -H 'appkey: yyyy' \
@@ -486,22 +488,22 @@ Can be used to extract information from any or one of the supported documents de
 					  -F 'toDate=15/11/2015' \
 					  -F 'amount=100'
 
-## Supported Document Types 
+## Supported Document Types
 |Types|Fields|
 ---|---
 |id_front| id, name, dob, province
 |id_back| doi, province
-|id\_new\_front| id, name, gender, dob, address, doi, doe, province 
+|id\_new\_front| id, name, gender, dob, address, doi, doe, province
 |id\_new\_back| doi, doe
 |mrc_front| mrc-number
-|mrc_back| name, address, brand, model, capacity, engine-number, chassis-number, number-plate, price, verification: (name, month-current-registration, year-current-registration, month-first-registration, year-first-registration) 
+|mrc_back| name, address, brand, model, capacity, engine-number, chassis-number, number-plate, price, verification: (name, month-current-registration, year-current-registration, month-first-registration, year-first-registration)
 |dl\_old\_front| dl-number, name, dob, nationality, address, expiry
 |dl\_new\_front| dl-number, name, dob, nationality, address, expiry
 
 ### Response Structure for Each Type:
 - #### National ID
 	- type: **id_front**
-	
+
 	   	```
 	   	{
 	    	"id": <type: String, description: ID of the holder>,
@@ -512,7 +514,7 @@ Can be used to extract information from any or one of the supported documents de
 	  	```
 
 	- type: **id_back**
-	
+
 	   	```
 	   	{
 	    	"doi": <type: String, description: Date of Issue of the National ID>,
@@ -521,7 +523,7 @@ Can be used to extract information from any or one of the supported documents de
 	   	```
 
 	- type: **id\_new\_front**
-	
+
 	   	```
 	   	{
 	    	"id": <type: String, description: ID of the holder>,
@@ -534,9 +536,9 @@ Can be used to extract information from any or one of the supported documents de
 	    	"province": <type: String, description: Province of Issue of the ID>
 	   	}
 	  	```
-	  
+
 	- type: **id\_new\_back**
-	 
+
 		```
 		{
 			"doi": <type: String, description: Date of Issue of the National ID>,
@@ -547,15 +549,15 @@ Can be used to extract information from any or one of the supported documents de
 
 - #### Motorbike Registration Certificate (MRC)
 	- type: **mrc_front**
-		
+
 		```
 		{
 			"mrc-number": <type: String, description: MRC Number of the motorbike>
 		}
 		```
-	  
+
 	- type: **mrc_back**
-		
+
 		```
 		{
 			"name": <type: String, description: Name of the Owner>,
@@ -575,10 +577,10 @@ Can be used to extract information from any or one of the supported documents de
 				"year-current-registration": <type: Boolean, description: true if verified, false if not verified>,
 			}
 		}
-		```	
+		```
 - #### DL
 	- type: **dl_old_front**
-	
+
 	   	```
 	   	{
 	    	"dl-number": <type: String, description: ID of the holder>,
@@ -590,7 +592,7 @@ Can be used to extract information from any or one of the supported documents de
 	   	}
 	  	```
 	- type: **dl_new_front**
-	
+
 	   	```
 	   	{
 	    	"dl-number": <type: String, description: ID of the holder>,
