@@ -112,7 +112,42 @@ Can be used to extract information from any or one of the supported documents de
 				"type" : "id_type"
 			}]
 			```
-
+        
+	* **Fraud Check:**
+		For the `id_type` as `id_front` and `id_new_front`, we do two types of fraud checks:
+		- **Black and White** Check if the image is Black and White. True if `isBlackWhite` is `yes`.
+		- **Province to National ID Mapping** There is a mapping between the province and the National ID number. We check if this holds true. Mapping fails if `provinceMismatch` is `yes`.
+		
+		The response will have additional key `fraudCheck` inside the key `details`: 
+		```json
+		[{
+			"details" : {
+				"fraudCheck": {
+				    "isBlackWhite": "yes/no",
+				    "provinceMismatch": "yes/no"
+				},
+				"field-1" : {
+				    "value" : "extracted-value-1",
+				    "conf" : <float-value>,
+				    "to-be-reviewed" : "yes/no"
+				},
+				"field-2" : {
+				    "value" : "extracted-value-2",
+				    "conf" : <float-value>,
+				    "to-be-reviewed" : "yes/no"
+				},
+				"field-3" : {
+				    "value" : "extracted-value-3",
+				    "conf" : <float-value>,
+				    "to-be-reviewed" : "yes/no"
+				},
+				..
+			},
+			"type" : "id_type"	
+		}]
+		```
+		`fraudCheck` key will be present only if `id_type` is `id_front` or `id_new_front`
+		
 	* **Error Response:**
 		There are 3 types of request errors and `HTTP Status Code 400` is returned in all 3 cases:
 		- No Image input
@@ -509,7 +544,12 @@ Can be used to extract information from any or one of the supported documents de
 	    	"id": <type: String, description: ID of the holder>,
 	    	"name": <type: String, description: Name of the holder>,
 	    	"dob": <type: String, description: Date of Birth of the holder>,
-	    	"province": <type: String, description: Province of Issue of the ID>
+	    	"province": <type: String, description: Province of Issue of the ID>,
+		"fraudCheck": 
+		  {
+		    "isBlackWhite": <type:String "yes/no", description: yes if card is black and white>,
+		    "provinceMismatch": <type:String "yes/no", description: yes if mismatch between ID and province>
+		  }
 	   	}
 	  	```
 
@@ -533,7 +573,12 @@ Can be used to extract information from any or one of the supported documents de
 	    	"address": <type: String, description: Current Address of the holder>,
 	    	"doi": <type: String, description: Date of Issue of the ID>,
 	    	"doe": <type: String, description: Date of Expiry of the ID>,
-	    	"province": <type: String, description: Province of Issue of the ID>
+	    	"province": <type: String, description: Province of Issue of the ID>,
+		"fraudCheck": 
+		  {
+		    "isBlackWhite": <type:String "yes/no", description: yes if card is black and white>,
+		    "provinceMismatch": <type:String "yes/no", description: yes if mismatch between ID and province>
+		  }
 	   	}
 	  	```
 
