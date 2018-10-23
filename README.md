@@ -114,11 +114,11 @@ Can be used to extract information from any or one of the supported documents de
 			```
         
 	* **Fraud Check:**
-		For the `id_type` as `id_front` and `id_new_front`, we do two types of fraud checks:
+		We check two types of fraud:
 		- **Black and White** Check if the image is Black and White. True if `isBlackWhite` is `yes`.
-		- **Province to National ID Mapping** There is a mapping between the province and the National ID number. We check if this holds true. Mapping fails if `provinceMismatch` is `yes`.
+		- **Province to National ID Mapping** Fixed mapping exists between the ID number and the province. We check if this holds true. If the ID Number does not match the province, `provinceMismatch` is `yes`.
 		
-		The response will have additional key `fraudCheck` inside the key `details`: 
+		The response will have key `fraudCheck` inside the key `details`: 
 		```json
 		[{
 			"details" : {
