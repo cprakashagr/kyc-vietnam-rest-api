@@ -2,7 +2,7 @@
 
 ## Overview
 
-This documentation describes Vietnam Docs API v1. If you have any queries please contact support. The postman collection can be found at this [link](https://www.getpostman.com/collections/98421b183550c5f8c645).
+This documentation describes Vietnam Docs API v1.1. If you have any queries please contact support. The postman collection can be found at this [link](https://www.getpostman.com/collections/98421b183550c5f8c645).
 
 ## Contents
 - [HyperVerge Vietnam Documents - API Documentation](#hyperverge-vietnam-documents-api-documentation)
@@ -29,7 +29,7 @@ All optional and compulsory parameters are passed as part of the request body.
 ## Root Endpoint
 A `GET` request can be issued to the root endpoint to check for successful connection :
 
-	 curl https://apac.docs.hyperverge.co/v1
+	 curl https://apac.docs.hyperverge.co/v1.1
 
 The `plain/text` reponse of `"AoK!"` should be received.
 
@@ -37,7 +37,7 @@ The `plain/text` reponse of `"AoK!"` should be received.
 
 Currently, a simple appId, appKey combination is passed in the request header. The appId and appKey are provided on request by the HyperVerge team. If you would like to try the API, please reach out to contact@hyperverge.co
 
-	curl -X POST http://apac.docs.hyperverge.co/v1/readNID \
+	curl -X POST http://apac.docs.hyperverge.co/v1.1/readNID \
 	  -H 'appid: xxx' \
 	  -H 'appkey: yyy' \
 	  -H 'content-type: multipart/form-data;' \
@@ -191,7 +191,7 @@ Can be used to extract information from any or one of the supported documents de
 			- Input having 2 images
 
 			 	```
-			    curl -X POST https://apac.docs.hyperverge.co/v1/readNID \
+			    curl -X POST https://apac.docs.hyperverge.co/v1.1/readNID \
 					  -H 'appid: xxx' \
 					  -H 'appkey: yyyy' \
 					  -H 'content-type: multipart/form-data;\
@@ -202,7 +202,7 @@ Can be used to extract information from any or one of the supported documents de
 			- Input having 2 pdfs
 
 				```
-			    curl -X POST https://apac.docs.hyperverge.co/v1/readNID \
+			    curl -X POST https://apac.docs.hyperverge.co/v1.1/readNID \
 					  -H 'appid: xxx' \
 					  -H 'appkey: yyyy' \
 					  -H 'content-type: multipart/form-data;\
@@ -213,7 +213,7 @@ Can be used to extract information from any or one of the supported documents de
 			- Input having 1 image and 1 pdf
 
 				```	   
-			   curl -X POST https://apac.docs.hyperverge.co/v1/readNID \
+			   curl -X POST https://apac.docs.hyperverge.co/v1.1/readNID \
 					  -H 'appid: xxx' \
 					  -H 'appkey: yyyy' \
 					  -H 'content-type: multipart/form-data;\
@@ -322,7 +322,7 @@ Can be used to extract information from any or one of the supported documents de
 
 		 - readMRC
 
-			    curl -X POST https://apac.docs.hyperverge.co/v1/readMRC \
+			    curl -X POST https://apac.docs.hyperverge.co/v1.1/readMRC \
 					  -H 'appid: xxx' \
 					  -H 'appkey: yyyy' \
 					  -H 'content-type: multipart/form-data;' \
@@ -422,7 +422,7 @@ Can be used to extract information from any or one of the supported documents de
 
 		 - readDL
 
-			    curl -X POST https://apac.docs.hyperverge.co/v1/readDL \
+			    curl -X POST https://apac.docs.hyperverge.co/v1.1/readDL \
 					  -H 'appid: xxx' \
 					  -H 'appkey: yyyy' \
 					  -H 'content-type: multipart/form-data;' \
@@ -511,7 +511,7 @@ Can be used to extract information from any or one of the supported documents de
 
 		 - verifyEVN
 
-			    curl -X POST https://apac.docs.hyperverge.co/v1/verifyEVN \
+			    curl -X POST https://apac.docs.hyperverge.co/v1.1/verifyEVN \
 					  -H 'appid: xxx' \
 					  -H 'appkey: yyyy' \
 					  -H 'content-type: multipart/form-data;' \
