@@ -2,7 +2,7 @@
 
 ## Overview
 
-This documentation describes Vietnam Docs API v1.1. If you have any queries please contact support. The postman collection can be found at this [link](https://www.getpostman.com/collections/98421b183550c5f8c645).
+This documentation describes Vietnam Docs API v1.1. If you have any queries please contact support. The postman collection can be found [here](https://www.getpostman.com/collections/97da26739e6a67557e88).
 
 ## Contents
 - [HyperVerge Vietnam Documents - API Documentation](#hyperverge-vietnam-documents-api-documentation)
@@ -17,6 +17,7 @@ This documentation describes Vietnam Docs API v1.1. If you have any queries plea
 	- [Supported Document Types](#supported-document-types)
 		- [Response Structure for Each Type](#response-structure-for-each-type)
 	- [Confidence Score for Prediction](#confidence-score-for-prediction)
+	- [Data logging and clientId](#data-logging-and-clientid)
 
 
 ## Schema
@@ -652,6 +653,16 @@ Can be used to extract information from any or one of the supported documents de
 ## Confidence Score for Prediction
 
 For any field which is extracted from the document, the confidence score would be reported in the key `"conf"`. The score would be a float value between 0 and 1.  The key `"to-be-reviewed"` takes the values `"yes/no"`, `yes` indicates that the field is flagged for manual review.
+
+## Data logging and clientId
+
+These optional params are used to facilitate better debugging of the system. 
+
+`clientId` is a unique identifier that is assigned to the end customer by the API user. This would need to be passed in the request body. And the parameter, would be the 
+same for the different API calls made for the of same customer.
+
+By default, the input images are not stored by HyperVerge systems, however, if the user sets the optional parameter `dataLogging` to string value "yes", then the images will be stored and the requestId can be 
+provided to HyperVerge to check the uploaded image incase of an inaccurate extraction.
 
 <!---
 ## API wrappers and sample code snippets (Beta)
