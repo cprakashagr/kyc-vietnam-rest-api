@@ -152,7 +152,7 @@ Can be used to extract information from any or one of the supported documents de
 		`fraudCheck` key will be present only if `id_type` is `id_front` or `id_new_front`
 		
 	* **Split Address:**
-		We split address extracted from the NationalId into province, ward, street and disctrict, if `enableAddressSplit` is `true`. By default, this value is `false`. 
+		We split address extracted from the NationalId into province, ward, street and disctrict, if `enableAddressSplit` is `true`. By default, this value is `false`. Please note that these keys will be missing if not extracted. For example, if we are not able to extract district, then this key will not be present.
 		
 		The response will have key `address_split` inside the key `details`: 
 		
