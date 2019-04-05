@@ -120,6 +120,7 @@ Can be used to extract information from any or one of the supported documents de
 		- **Province to National ID Mapping** Fixed mapping exists between the ID number and the province. We check if this holds true. If the ID Number does not match the province, `provinceMismatch` is `yes`.
 		
 		The response will have key `fraudCheck` inside the key `details`: 
+		
 		```json
 		[{
 			"details" : {
@@ -147,7 +148,46 @@ Can be used to extract information from any or one of the supported documents de
 			"type" : "id_type"	
 		}]
 		```
+		
 		`fraudCheck` key will be present only if `id_type` is `id_front` or `id_new_front`
+		
+	* **Split Address:**
+		We split address extracted from the NationalId into province, ward, street and disctrict, if `enableAddressSplit` is `true`. By default, this value is `false`.
+		
+		If the AI engine is not able to extract `address`, `address_split` will also be absent. Other keys like province, ward, street and district will be absent if the engine is unable to extract them.
+		
+		The response will have key `address_split` inside the key `details`: 
+		
+		```json
+		[{
+			"details" : {
+				"address_split": {
+				    "province": "extracted_province",
+				    "ward": "extracted_ward",
+				    "street": "extracted_street",
+				    "district": "extracted_district"
+				},
+				"field-1" : {
+				    "value" : "extracted-value-1",
+				    "conf" : <float-value>,
+				    "to-be-reviewed" : "yes/no"
+				},
+				"field-2" : {
+				    "value" : "extracted-value-2",
+				    "conf" : <float-value>,
+				    "to-be-reviewed" : "yes/no"
+				},
+				"field-3" : {
+				    "value" : "extracted-value-3",
+				    "conf" : <float-value>,
+				    "to-be-reviewed" : "yes/no"
+				},
+				..
+			},
+			"type" : "id_type"	
+		}]
+		```
+		
 		
 	* **Error Response:**
 		There are 3 types of request errors and `HTTP Status Code 400` is returned in all 3 cases:
